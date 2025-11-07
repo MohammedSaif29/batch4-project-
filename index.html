@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AidConnect - Presentation App</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .page-section {
+            display: none;
+        }
+        .page-section.active {
+            display: block;
+        }
+        .nav-btn {
+            transition: all 0.3s ease;
+        }
+        .nav-btn:hover {
+            transform: translateY(-2px);
+        }
+        .fade-in {
+            animation: fadeIn 0.5s ease-in;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+
+    <!-- Navigation Bar -->
+    <nav class="bg-white shadow-md sticky top-0 z-50">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex justify-between items-center">
+                <a href="#" onclick="showPage('home')" class="text-2xl font-bold text-pink-600">AidConnect</a>
+                <div class="flex gap-4">
+                    <button onclick="showPage('home')" class="nav-btn px-4 py-2 text-gray-700 hover:text-pink-600 font-medium">Home</button>
+                    <button onclick="showPage('login')" class="nav-btn px-4 py-2 text-gray-700 hover:text-pink-600 font-medium">Login</button>
+                    <button onclick="showPage('donor')" class="nav-btn px-4 py-2 text-gray-700 hover:text-pink-600 font-medium">Donor</button>
+                    <button onclick="showPage('admin')" class="nav-btn px-4 py-2 text-gray-700 hover:text-pink-600 font-medium">Admin</button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Home Page -->
+    <section id="home-page" class="page-section active">
+        <div class="flex flex-col min-h-screen">
+            <div class="flex-grow flex items-center justify-center px-6 py-12">
+                <div class="text-center max-w-4xl">
+                    <h1 class="text-5xl font-extrabold text-gray-900 mb-6">Welcome to AidConnect</h1>
+                    <p class="text-lg text-gray-600 mb-8 leading-relaxed">
+                        AidConnect is a platform that bridges the gap between donors and those in need. 
+                        Our mission is to make charitable giving simple, transparent, and impactful.
+                    </p>
+                    <div class="flex justify-center gap-4">
+                        <button onclick="showPage('login')" class="bg-pink-600 text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-pink-700 transition">
+                            Get Started
+                        </button>
+                        <button onclick="scrollToFeatures()" class="bg-white text-pink-600 px-8 py-4 rounded-lg text-lg font-semibold border-2 border-pink-600 hover:bg-pink-50 transition">
+                            Learn More
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <div id="features" class="bg-white py-16 px-6">
+                <div class="container mx-auto max-w-6xl">
+                    <h2 class="text-4xl font-bold text-center text-gray-900 mb-12">Our Features</h2>
+                    <div class="grid md:grid-cols-3 gap-8">
+                        <div class="bg-gray-50 p-8 rounded-xl shadow-md text-center">
+                            <div class="text-5xl mb-4">🤝</div>
+                            <h3 class="text-2xl font-semibold text-gray-800 mb-4">Easy Donations</h3>
+                            <p class="text-gray-600">Make donations quickly and securely to verified recipients in need.</p>
+                        </div>
+                        <div class="bg-gray-50 p-8 rounded-xl shadow-md text-center">
+                            <div class="text-5xl mb-4">🔍</div>
+                            <h3 class="text-2xl font-semibold text-gray-800 mb-4">Transparency</h3>
+                            <p class="text-gray-600">Track your donations and see exactly where your contributions go.</p>
+                        </div>
+                        <div class="bg-gray-50 p-8 rounded-xl shadow-md text-center">
+                            <div class="text-5xl mb-4">💼</div>
+                            <h3 class="text-2xl font-semibold text-gray-800 mb-4">Admin Control</h3>
+                            <p class="text-gray-600">Efficient management system for verifying and managing requests.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <footer class="bg-gray-900 text-white py-8">
+                <div class="container mx-auto text-center">
+                    <p class="text-lg">&copy; 2025 AidConnect. Making a difference, one donation at a time.</p>
+                </div>
+            </footer>
+        </div>
+    </section>
+
+    <!-- Login Page -->
+    <section id="login-page" class="page-section">
+        <div class="flex items-center justify-center min-h-screen px-6 py-12">
+            <div class="w-full max-w-6xl">
+                <h2 class="text-4xl font-bold text-center text-gray-800 mb-12">Login As</h2>
+                <div class="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+                    
+                    <!-- Donor Login -->
+                    <div class="bg-white rounded-2xl shadow-xl p-8 hover:shadow-2xl transition-all border-2 border-transparent hover:border-pink-400">
+                        <div class="text-center mb-6">
+                            <div class="inline-flex items-center justify-center w-20 h-20 bg-pink-100 rounded-full mb-4">
+                                <span class="text-4xl">🎁</span>
+                            </div>
+                            <h3 class="text-2xl font-bold text-gray-800 mb-2">Donor</h3>
+                            <p class="text-gray-600 text-sm">Make a difference by donating</p>
+                        </div>
+                        <button onclick="loginAs('donor')" class="w-full bg-pink-600 text-white py-3 rounded-lg font-semibold hover:bg-pink-700 transition">
+                            Login as Donor
+                        </button>
+                    </div>
+
+                    <!-- Recipient Login -->
+                    <div class="bg-white rounded-2xl shadow-xl p-8 hover:shadow-2xl transition-all border-2 border-transparent hover:border-green-400">
+                        <div class="text-center mb-6">
+                            <div class="inline-flex items-center justify-center w-20 h-20 bg-green-100 rounded-full mb-4">
+                                <span class="text-4xl">🙏</span>
+                            </div>
+                            <h3 class="text-2xl font-bold text-gray-800 mb-2">Recipient</h3>
+                            <p class="text-gray-600 text-sm">Request assistance when needed</p>
+                        </div>
+                        <button onclick="loginAs('recipient')" class="w-full bg-green-600 text-white py-3 rounded-lg font-semibold hover:bg-green-700 transition">
+                            Login as Recipient
+                        </button>
+                    </div>
+
+                    <!-- Admin Login -->
+                    <div class="bg-white rounded-2xl shadow-xl p-8 hover:shadow-2xl transition-all border-2 border-transparent hover:border-blue-400 sm:col-span-2 lg:col-span-1 mx-auto w-full max-w-md lg:max-w-none">
+                        <div class="text-center mb-6">
+                            <div class="inline-flex items-center justify-center w-20 h-20 bg-blue-100 rounded-full mb-4">
+                                <span class="text-4xl">👨‍💼</span>
+                            </div>
+                            <h3 class="text-2xl font-bold text-gray-800 mb-2">Admin</h3>
+                            <p class="text-gray-600 text-sm">Manage and verify requests</p>
+                        </div>
+                        <button onclick="loginAs('admin')" class="w-full bg-blue-600 text-white py-3 rounded-lg font-semibold hover:bg-blue-700 transition">
+                            Login as Admin
+                        </button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Donor Dashboard -->
+    <section id="donor-page" class="page-section">
+        <div class="bg-gray-100 min-h-screen">
+            <div class="container mx-auto px-6 py-8">
+                <div class="flex justify-between items-center mb-8">
+                    <h1 class="text-3xl font-bold text-gray-800">Donor Dashboard</h1>
+                    <button onclick="handleLogout()" class="bg-red-500 text-white px-6 py-2 rounded-lg hover:bg-red-600 transition">Logout</button>
+                </div>
+
+                <!-- Dashboard Stats -->
+                <div class="grid md:grid-cols-3 gap-6 mb-8">
+                    <div class="bg-white p-6 rounded-xl shadow-md">
+                        <h3 class="text-gray-600 text-sm font-semibold mb-2">Total Donations</h3>
+                        <p class="text-3xl font-bold text-pink-600">₹25,000</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-xl shadow-md">
+                        <h3 class="text-gray-600 text-sm font-semibold mb-2">People Helped</h3>
+                        <p class="text-3xl font-bold text-green-600">12</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-xl shadow-md">
+                        <h3 class="text-gray-600 text-sm font-semibold mb-2">Active Requests</h3>
+                        <p class="text-3xl font-bold text-blue-600">8</p>
+                    </div>
+                </div>
+
+                <!-- Available Requests -->
+                <div class="bg-white rounded-xl shadow-md p-6">
+                    <h2 class="text-2xl font-bold text-gray-800 mb-6">Available Requests</h2>
+
+                    <div id="requests-container" class="space-y-4">
+                        <!-- Requests will be rendered here by client JS -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Admin Dashboard -->
+    <section id="admin-page" class="page-section">
+        <div class="bg-gray-100 min-h-screen">
+            <div class="container mx-auto px-6 py-8">
+                <div class="flex justify-between items-center mb-8">
+                    <h1 class="text-3xl font-bold text-gray-800">Admin Dashboard</h1>
+                    <button onclick="handleLogout()" class="bg-red-500 text-white px-6 py-2 rounded-lg hover:bg-red-600 transition">Logout</button>
+                </div>
+
+                <!-- Admin Stats -->
+                <div class="grid md:grid-cols-4 gap-6 mb-8">
+                    <div class="bg-white p-6 rounded-xl shadow-md">
+                        <h3 class="text-gray-600 text-sm font-semibold mb-2">Pending Requests</h3>
+                        <p class="text-3xl font-bold text-yellow-600">5</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-xl shadow-md">
+                        <h3 class="text-gray-600 text-sm font-semibold mb-2">Approved Requests</h3>
+                        <p class="text-3xl font-bold text-green-600">23</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-xl shadow-md">
+                        <h3 class="text-gray-600 text-sm font-semibold mb-2">Total Donors</h3>
+                        <p class="text-3xl font-bold text-blue-600">156</p>
+                    </div>
+                    <div class="bg-white p-6 rounded-xl shadow-md">
+                        <h3 class="text-gray-600 text-sm font-semibold mb-2">Total Amount</h3>
+                        <p class="text-3xl font-bold text-pink-600">₹2.5L</p>
+                    </div>
+                </div>
+
+                <!-- Pending Verifications -->
+                <div class="bg-white rounded-xl shadow-md p-6 mb-8">
+                    <h2 class="text-2xl font-bold text-gray-800 mb-6">Pending Verifications</h2>
+
+                    <div id="admin-pending-container" class="space-y-4">
+                        <!-- Admin pending requests will be rendered here -->
+                    </div>
+                </div>
+
+                <!-- Recent Activity -->
+                <div class="bg-white rounded-xl shadow-md p-6">
+                    <h2 class="text-2xl font-bold text-gray-800 mb-6">Recent Activity</h2>
+                    <div class="space-y-3">
+                        <div class="flex items-center gap-3 p-3 bg-green-50 rounded-lg">
+                            <span class="text-2xl">✅</span>
+                            <div>
+                                <p class="font-semibold text-gray-800">Approved: Education Support Request</p>
+                                <p class="text-sm text-gray-600">2 hours ago</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-3 p-3 bg-blue-50 rounded-lg">
+                            <span class="text-2xl">💰</span>
+                            <div>
+                                <p class="font-semibold text-gray-800">Donation Received: ₹5,000 for Medical Emergency</p>
+                                <p class="text-sm text-gray-600">5 hours ago</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-3 p-3 bg-red-50 rounded-lg">
+                            <span class="text-2xl">❌</span>
+                            <div>
+                                <p class="font-semibold text-gray-800">Rejected: Duplicate Request</p>
+                                <p class="text-sm text-gray-600">1 day ago</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Page Navigation
+        function showPage(pageName) {
+            // Hide all pages
+            document.querySelectorAll('.page-section').forEach(page => {
+                page.classList.remove('active');
+            });
+            
+            // Show selected page with fade-in effect
+            const targetPage = document.getElementById(pageName + '-page');
+            if (targetPage) {
+                targetPage.classList.add('active', 'fade-in');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+        }
+
+        // Auth token storage
+        const AUTH_TOKEN_KEY = 'aid_connect_auth_token';
+        
+        function getStoredToken() {
+            return localStorage.getItem(AUTH_TOKEN_KEY);
+        }
+
+        function setStoredToken(token) {
+            localStorage.setItem(AUTH_TOKEN_KEY, token);
+        }
+
+        function clearStoredToken() {
+            localStorage.removeItem(AUTH_TOKEN_KEY);
+        }
+
+        // Login Functions
+        async function loginAs(role) {
+            if (role === 'donor') {
+                showPage('donor');
+                showNotification('Logged in as Donor', 'success');
+            } else if (role === 'admin') {
+                const username = prompt('Admin username:');
+                if (!username) return;
+                const password = prompt('Admin password:');
+                if (!password) return;
+
+                try {
+                    const res = await fetch('/api/auth/login', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ username, password })
+                    });
+                    const data = await res.json();
+                    
+                    if (data.success && data.token) {
+                        setStoredToken(data.token);
+                        showPage('admin');
+                        showNotification('Logged in as Admin', 'success');
+                        // Immediately fetch admin requests after successful login
+                        await fetchAdminRequests();
+                    } else {
+                        showNotification(data.message || 'Login failed', 'error');
+                    }
+                } catch (err) {
+                    console.error('Login error:', err);
+                    showNotification('Login failed - check console', 'error');
+                }
+            } else if (role === 'recipient') {
+                showNotification('Recipient dashboard coming soon!', 'info');
+            }
+        }
+
+        // Logout Function
+        function handleLogout() {
+            showNotification('Logged out successfully', 'success');
+            showPage('home');
+        }
+
+        // Donor Actions
+        // Donor Actions
+        async function handleDonate(requestId, requestName) {
+            const amount = prompt(`Enter donation amount for "${requestName}":`);
+            if (amount === null) return; // cancelled
+            if (!amount || isNaN(amount) || parseFloat(amount) <= 0) {
+                showNotification('Please enter a valid amount', 'error');
+                return;
+            }
+
+            const donorName = prompt('Enter your name (or leave blank for anonymous):') || 'Anonymous';
+            const description = prompt('Add a message (optional):') || '';
+
+            try {
+                const resp = await fetch('/api/donate', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ 
+                        amount: Number(amount), 
+                        donorName,
+                        description: description || `Donation for ${requestName}`
+                    })
+                });
+                const json = await resp.json();
+                if (resp.ok && json.success) {
+                    showNotification(`Thank you for your donation! It has been submitted for admin approval.`, 'success');
+                } else {
+                    showNotification(json.message || 'Donation failed', 'error');
+                }
+            } catch (err) {
+                console.error('Donation error', err);
+                showNotification('Network error while donating', 'error');
+            }
+        }
+
+        // Admin API helpers
+        async function adminFetch(url, options = {}) {
+            const token = getStoredToken();
+            if (!token) {
+                showNotification('Admin login required', 'error');
+                showPage('login');
+                return null;
+            }
+
+            const res = await fetch(url, {
+                ...options,
+                headers: {
+                    ...options.headers,
+                    'Authorization': `Bearer ${token}`,
+                    'Content-Type': 'application/json'
+                }
+            });
+
+            if (res.status === 401) {
+                clearStoredToken();
+                showNotification('Session expired - please login again', 'error');
+                showPage('login');
+                return null;
+            }
+
+            return res;
+        }
+
+        // Admin Actions
+        async function handleApprove(id, name) {
+            if (!confirm(`Are you sure you want to approve the request from ${name}?`)) return;
+
+            try {
+                const res = await adminFetch(`/api/requests/${id}`, {
+                    method: 'PATCH',
+                    body: JSON.stringify({ status: 'approved' })
+                });
+                if (!res) return; // auth error handled by adminFetch
+
+                const data = await res.json();
+                if (data.success) {
+                    showNotification(`Request from ${name} has been approved!`, 'success');
+                    fetchAdminRequests(); // refresh the list
+                } else {
+                    showNotification(data.message || 'Failed to approve request', 'error');
+                }
+            } catch (err) {
+                console.error('Approve error:', err);
+                showNotification('Error approving request', 'error');
+            }
+        }
+
+        async function handleReject(id, name) {
+            if (!confirm(`Are you sure you want to reject the request from ${name}?`)) return;
+
+            try {
+                const res = await adminFetch(`/api/requests/${id}`, {
+                    method: 'PATCH',
+                    body: JSON.stringify({ status: 'rejected' })
+                });
+                if (!res) return; // auth error handled by adminFetch
+
+                const data = await res.json();
+                if (data.success) {
+                    showNotification(`Request from ${name} has been rejected`, 'error');
+                    fetchAdminRequests(); // refresh the list
+                } else {
+                    showNotification(data.message || 'Failed to reject request', 'error');
+                }
+            } catch (err) {
+                console.error('Reject error:', err);
+                showNotification('Error rejecting request', 'error');
+            }
+        }
+
+        function handleViewDetails(name) {
+            alert(`Viewing detailed information for request submitted by ${name}.\n\n` +
+                  `This would open a detailed modal with:\n` +
+                  `- Personal information\n` +
+                  `- Supporting documents\n` +
+                  `- Request history\n` +
+                  `- Verification status`);
+        }
+
+        // Admin API interactions
+        async function fetchAdminRequests() {
+            const token = getStoredToken();
+            if (!token) {
+                showNotification('Please login as admin first', 'error');
+                showPage('login');
+                return;
+            }
+
+            try {
+                const res = await fetch('/api/admin/requests/pending', {
+                    headers: {
+                        'Authorization': `Bearer ${token}`,
+                        'Content-Type': 'application/json'
+                    }
+                });
+
+                if (res.status === 401) {
+                    clearStoredToken();
+                    showNotification('Session expired - please login again', 'error');
+                    showPage('login');
+                    return;
+                }
+
+                const json = await res.json();
+                if (!json.success) {
+                    console.error('Failed to load admin requests', json);
+                    return;
+                }
+
+                const container = document.getElementById('admin-pending-container');
+                if (!container) return;
+                container.innerHTML = '';
+
+                if (json.data.length === 0) {
+                    container.innerHTML = '<p class="text-gray-600">No pending requests</p>';
+                    return;
+                }
+
+                json.data.forEach(req => {
+                    const card = document.createElement('div');
+                    card.className = 'border border-gray-200 rounded-lg p-6';
+                    card.innerHTML = `
+                        <div class="flex justify-between items-start mb-4">
+                            <div>
+                                <h3 class="text-xl font-semibold text-gray-800 mb-2">${escapeHtml(req.title)}</h3>
+                                <p class="text-gray-600 mb-2">Submitted by: ${escapeHtml(req.submittedBy || 'Unknown')}</p>
+                                <div class="flex gap-4 text-sm text-gray-500">
+                                    <span>📍 ${escapeHtml(req.location || '')}</span>
+                                    <span>🕒 ${escapeHtml(req.postedAgo || '')}</span>
+                                    <span>💰 Amount: ₹${Number(req.amountNeeded).toLocaleString()}</span>
+                                </div>
+                            </div>
+                            <span class="bg-yellow-100 text-yellow-800 px-3 py-1 rounded-full text-sm font-semibold">${escapeHtml(req.status || '')}</span>
+                        </div>
+                        <div class="flex gap-3">
+                            <button class="approve-btn bg-green-600 text-white px-6 py-2 rounded-lg font-semibold hover:bg-green-700 transition">Approve</button>
+                            <button class="reject-btn bg-red-600 text-white px-6 py-2 rounded-lg font-semibold hover:bg-red-700 transition">Reject</button>
+                            <button class="view-btn bg-blue-600 text-white px-6 py-2 rounded-lg font-semibold hover:bg-blue-700 transition">View Details</button>
+                        </div>
+                    `;
+
+                    const approveBtn = card.querySelector('.approve-btn');
+                    const rejectBtn = card.querySelector('.reject-btn');
+                    const viewBtn = card.querySelector('.view-btn');
+
+                    approveBtn.addEventListener('click', () => handleApprove(req.id, req.submittedBy));
+                    rejectBtn.addEventListener('click', () => handleReject(req.id, req.submittedBy));
+                    viewBtn.addEventListener('click', () => handleViewDetails(req.submittedBy));
+
+                    container.appendChild(card);
+                });
+            } catch (err) {
+                console.error('Error fetching admin requests', err);
+            }
+        }
+
+        async function handleApprove(id, name) {
+            const token = getStoredToken();
+            if (!token) {
+                showNotification('Please login as admin first', 'error');
+                showPage('login');
+                return;
+            }
+
+            if (!confirm(`Are you sure you want to approve the request from ${name}?`)) return;
+            try {
+                const res = await fetch(`/api/requests/${id}`, {
+                    method: 'PATCH',
+                    headers: { 
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`
+                    },
+                    body: JSON.stringify({ status: 'approved' })
+                });
+
+                if (res.status === 401) {
+                    clearStoredToken();
+                    showNotification('Session expired - please login again', 'error');
+                    showPage('login');
+                    return;
+                }
+
+                const json = await res.json();
+                if (res.ok && json.success) {
+                    showNotification(`Request from ${name} has been approved!`, 'success');
+                    fetchAdminRequests();
+                } else {
+                    showNotification(json.message || 'Failed to approve', 'error');
+                }
+            } catch (err) {
+                console.error('Approve error', err);
+                showNotification('Network error while approving', 'error');
+            }
+        }
+
+        async function handleReject(id, name) {
+            const token = getStoredToken();
+            if (!token) {
+                showNotification('Please login as admin first', 'error');
+                showPage('login');
+                return;
+            }
+
+            if (!confirm(`Are you sure you want to reject the request from ${name}?`)) return;
+            try {
+                const res = await fetch(`/api/requests/${id}`, {
+                    method: 'PATCH',
+                    headers: { 
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${token}`
+                    },
+                    body: JSON.stringify({ status: 'rejected' })
+                });
+
+                if (res.status === 401) {
+                    clearStoredToken();
+                    showNotification('Session expired - please login again', 'error');
+                    showPage('login');
+                    return;
+                }
+
+                const json = await res.json();
+                if (res.ok && json.success) {
+                    showNotification(`Request from ${name} has been rejected`, 'error');
+                    fetchAdminRequests();
+                } else {
+                    showNotification(json.message || 'Failed to reject', 'error');
+                }
+            } catch (err) {
+                console.error('Reject error', err);
+                showNotification('Network error while rejecting', 'error');
+            }
+        }
+
+        // Scroll to Features
+        function scrollToFeatures() {
+            const featuresSection = document.getElementById('features');
+            if (featuresSection) {
+                featuresSection.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+
+        // Notification System
+        function showNotification(message, type = 'info') {
+            const notification = document.createElement('div');
+            notification.className = `fixed top-4 right-4 px-6 py-4 rounded-lg shadow-lg text-white font-semibold z-50 fade-in`;
+            
+            switch(type) {
+                case 'success':
+                    notification.classList.add('bg-green-600');
+                    break;
+                case 'error':
+                    notification.classList.add('bg-red-600');
+                    break;
+                case 'info':
+                    notification.classList.add('bg-blue-600');
+                    break;
+                default:
+                    notification.classList.add('bg-gray-600');
+            }
+            
+            notification.textContent = message;
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.style.opacity = '0';
+                notification.style.transform = 'translateX(100%)';
+                setTimeout(() => notification.remove(), 300);
+            }, 3000);
+        }
+
+        // Initialize - Show home page by default
+        document.addEventListener('DOMContentLoaded', () => {
+            showPage('home');
+            // Load requests for donor page
+            fetchRequests();
+        });
+
+        // When showing pages, fetch data for that page when needed
+        const originalShowPage = showPage;
+        function showPage(pageName) {
+            // call original behavior
+            document.querySelectorAll('.page-section').forEach(page => {
+                page.classList.remove('active');
+            });
+            const targetPage = document.getElementById(pageName + '-page');
+            if (targetPage) {
+                targetPage.classList.add('active', 'fade-in');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+
+            // fetch data depending on page
+            if (pageName === 'donor') fetchRequests();
+            if (pageName === 'admin') fetchAdminRequests();
+        }
+
+        // Fetch requests from server and render them on Donor Dashboard
+        async function fetchRequests() {
+            try {
+                const res = await fetch('/api/requests');
+                const json = await res.json();
+                if (!res.ok || !json.success) {
+                    console.error('Failed to load requests', json);
+                    return;
+                }
+
+                const container = document.getElementById('requests-container');
+                if (!container) return;
+                container.innerHTML = '';
+
+                json.data.forEach(req => {
+                    const card = document.createElement('div');
+                    card.className = 'border border-gray-200 rounded-lg p-6 hover:shadow-lg transition';
+                    card.innerHTML = `
+                        <div class="flex justify-between items-start mb-4">
+                            <div>
+                                <h3 class="text-xl font-semibold text-gray-800 mb-2">${escapeHtml(req.title)}</h3>
+                                <p class="text-gray-600 mb-2">${escapeHtml(req.description)}</p>
+                                <div class="flex gap-4 text-sm text-gray-500">
+                                    <span>📍 ${escapeHtml(req.location || '')}</span>
+                                    <span>🕒 ${escapeHtml(req.postedAgo || '')}</span>
+                                </div>
+                            </div>
+                            <span class="bg-yellow-100 text-yellow-800 px-3 py-1 rounded-full text-sm font-semibold">${escapeHtml(req.priority || '')}</span>
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <div>
+                                <p class="text-sm text-gray-600">Amount Needed</p>
+                                <p class="text-2xl font-bold text-pink-600">₹${Number(req.amountNeeded).toLocaleString()}</p>
+                            </div>
+                            <button class="donate-btn bg-pink-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-pink-700 transition">
+                                Donate Now
+                            </button>
+                        </div>
+                    `;
+
+                    const btn = card.querySelector('.donate-btn');
+                    btn.addEventListener('click', () => handleDonate(req.id, req.title));
+
+                    container.appendChild(card);
+                });
+            } catch (err) {
+                console.error('Error fetching requests', err);
+            }
+        }
+
+        // Basic escaping to avoid injecting arbitrary HTML from server data
+        function escapeHtml(str) {
+            if (!str && str !== 0) return '';
+            return String(str)
+                .replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;')
+                .replace(/"/g, '&quot;')
+                .replace(/'/g, '&#039;');
+        }
+    </script>
+
+</body>
+</html>

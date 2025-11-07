@@ -1,0 +1,38 @@
+{
+  "requests": [
+    {
+      "id": 1,
+      "title": "Medical Emergency - Surgery",
+      "description": "Urgent medical assistance needed for life-saving surgery.",
+      "location": "Mumbai, India",
+      "postedAgo": "2 days ago",
+      "amountNeeded": 50000,
+      "priority": "Urgent",
+      "status": "pending",
+      "submittedBy": "Rahul Sharma"
+    },
+    {
+      "id": 2,
+      "title": "Education Support",
+      "description": "Help a talented student continue their education.",
+      "location": "Delhi, India",
+      "postedAgo": "1 week ago",
+      "amountNeeded": 15000,
+      "priority": "Active",
+      "status": "pending",
+      "submittedBy": "Priya Patel"
+    },
+    {
+      "id": 3,
+      "title": "Food & Shelter",
+      "description": "Family needs immediate support for basic necessities.",
+      "location": "Bangalore, India",
+      "postedAgo": "3 days ago",
+      "amountNeeded": 8000,
+      "priority": "Medium",
+      "status": "pending",
+      "submittedBy": "Anita Kumar"
+    }
+  ],
+  "donations": []
+}
